@@ -1,0 +1,12 @@
+<nav>
+	<div class="fcont nav-divs">
+		<div class="logo-div"><img src="../assets/images/logo.png" /></div>
+		<div class="nav-text" [routerLink]="['']">Home</div>
+	</div>
+	<div class="scont nav-divs navbar-right">
+		<div class="nav-text">Contact Us</div>
+		<div class="nav-text">Sign In</div>
+		<div class="nav-text">Cart ({{data.cart.length}})</div>
+	</div>
+</nav>
+<router-outlet></router-outlet>

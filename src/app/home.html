@@ -1,0 +1,23 @@
+<div class="row row-2">
+  <div class="col-sm-6">
+      <div class="text-cont">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      </div>
+  </div>
+    <div class="col-sm-6">
+      <div class="boldText">Amount Raised</div>
+      <div class="bar-cont">
+          <div class="bar left-bar"></div>
+          <div class="bar right-bar"></div>
+      </div>
+      <div class="amt-cont">
+          <span class="amt-num">$1322</span><br />
+          <span class="amt-text">Towards goal of $5000</span>
+      </div>
+    </div>
+</div>
+<div class="row row-3">
+    <div class="col-sm-4" *ngFor="let item of data.inventory; let i = index" ><img [src]="item.imgURL" class="ts-pic" (click)="setItem(i)" />
+        <div class="ts-text">Fruit of the Loom</div>
+    </div>
+</div>

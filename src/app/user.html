@@ -1,0 +1,87 @@
+<div class="row row-4">
+    <div class="col-sm-6">
+        <div class="tshirt-cont">
+            <img [src]="data.inventory[data.currentItem].imgURL" />
+        </div>
+        <div class="thumb-cont" >
+            <div *ngFor="let item of data.inventory; let i = index" [ngClass]="{'thumb': true, 'active': getActive(i)}" [ngStyle]="{'background-image': 'url('+ item.imgURL +')'}"></div>
+        </div>
+    </div>
+    <div class="col-sm-5 tshirt-data">
+        <div class="ts-detail">
+            <span class="ts-name">{{ data.inventory[data.currentItem].name }}</span><br />
+            <span class="ts-grp">{{ data.inventory[data.currentItem].subtext }}</span><br />
+            <span class="ts-amt">${{ data.inventory[data.currentItem].amount }}</span><span class="ts-unit"> / each</span>
+        </div>
+        <div class="ts-options">
+            <div class="select-color">Color</div>
+            <select class="pick1 form-control" [ngModel]="data.inventory[data.currentItem].color" (change) = "setItem($event.target.value)" >
+              <option [ngClass]="{'color-span': true }" *ngFor="let item of data.inventory" [value]="item.color" [ngStyle]="{ 'background-color': item.color | lowercase }" >{{item.color}}</option>
+            </select>
+            <div class="select-size">Size</div>
+            <select class="pick2 form-control" [(ngModel)]="data.inventory[data.currentItem].size">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+            </select>
+            <span class="size-text">SIZE CHART</span>
+            <hr />
+            <div class="pname-text">Player Name <span>Add $5</span></div>
+            <input type="text" class="p-name form-control" #pname (change)="checkAmount(pname.value, pnum.value)" [ngModel]="data.inventory[data.currentItem].playerName" />
+            <div class="pnum-text">Player Number <span>Add $5</span></div>
+            <input type="number" class="p-num form-control" #pnum (change)="checkAmount(pname.value, pnum.value)" [ngModel]="data.inventory[data.currentItem].playerNum" />
+            <hr />
+            <div class="select-qty">Quantity</div>
+            <select class="qty form-control" [ngModel]="data.inventory[data.currentItem].quantity" (change) = "setQuantity($event.target.value)" >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+        </div>
+        <div class="addtocart">
+            <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target=".bs-example-modal-lg" (click)="addtocart()" >ADD TO CART</button>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-body popup-confirm">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div class="row row-modal" *ngIf="data.cart.length">
+            <div class="col-md-9 final-data">
+                <span class="top-data"><i class="glyphicon glyphicon-check"></i>{{data.cart.length}} items added to cart</span>
+                <div class="row row-5">
+                    <div class="col-sm-3">
+                        <img [src]="data.cart[data.cart.length-1].imgURL" />
+                    </div>
+                    <div class="col-sm-5 cart-data">
+                        <span class="ts-name"> {{data.cart[data.cart.length-1].name}}</span><br />
+                        <span class="ts-grp">{{data.cart[data.cart.length-1].subtext}}</span><br />
+                        <span class="ts-dd">Size : {{data.cart[data.cart.length-1].size}}</span><br />
+                        <span class="ts-dd">Color : {{data.cart[data.cart.length-1].color}}</span><br />
+                        <span class="ts-dd">Player Name : {{data.cart[data.cart.length-1].playerName}}</span><br />
+                        <span class="ts-dd">Player Number : {{data.cart[data.cart.length-1].playerNum}}</span><br />
+                    </div>
+                    <div class="col-sm-2">
+                        <span>Qty : {{data.cart[data.cart.length-1].quantity}}</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="ts-amt">${{data.cart[data.cart.length-1].price}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 add-final">
+                <div class="item-num">Your cart : <span>1 items</span></div>
+                <div class="s-total">Subtotal : <span class="ts-amt">${{data.cart[data.cart.length-1].amount.toFixed(2)}}</span></div>
+                <div>Does not include tax or shipping</div>
+                <button type="button" class="btn btn-warning btn-block" data-dismiss="modal" [routerLink]="['/checkout']" >VIEW CART</button>
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal" [routerLink]="['/']" >CONTINUE SHOPPING</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

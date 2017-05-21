@@ -1,0 +1,43 @@
+<div class="row row-6">
+    <div class="col-sm-3 ts-name">Shopping Cart</div>
+    <div class="col-sm-5 secure-text"><i class="fa fa-lock fa-lg"></i><div>Secure Checkout<br />Your information is safe and secure</div></div>
+    <div class="col-sm-4 comment-div"><i class="fa fa-comment fa-lg"></i> LEAVE CART FEEDBACK</div>
+</div>
+<div class="row row-7" *ngFor="let item of data.cart">
+    <div class="col-sm-3">
+        <img [src]="item.imgURL" />
+    </div>
+    <div class="col-sm-6 cart-data">
+        <span class="ts-name">{{ item.name }}</span><br />
+        <span class="ts-grp">{{ item.subtext }}</span><br />
+        <span class="ts-dd">Size : {{ item.size }}</span><br />
+        <span class="ts-dd">Color : {{ item.color }}</span><br />
+        <span class="ts-dd">Player Name : {{ item.playerName }}</span><br />
+        <span class="ts-dd">Player Number : {{ item.playerNum }}</span><br />
+    </div>
+    <div class="col-sm-3 amt-div">
+        <span class="ts-dd">{{ item.quantity }} item / ${{ item.amount.toFixed(2) }}</span><br />
+        <span class="ts-grp">(${{ item.price }} each)</span>
+    </div>
+</div>
+<div class="row row-8">
+    <div class="col-md-4 col-12 pull-right">
+        <div class="row">
+            <div class="col-xs-6 text-right">
+                Total Quantity:<br>
+                Item Subtotal:<br><br>
+                Shipping:<br>
+                Tax:<br><br>
+                <span class="ts-name">Estimated Total:</span><br>
+            </div>
+            <div class="col-xs-6 text-right">
+                {{data.cart.length}} <br>
+                ${{data.totalAmount.toFixed(2)}}<br><br>
+                $0.00<br>
+                ---<br><br>
+                <span class="ts-name">${{data.totalAmount.toFixed(2)}}</span><br>
+            </div>
+            <button type="button" class="btn btn-warning btn-block btn-marg" [routerLink]="['']">PROCEED TO CHECKOUT</button>
+        </div>
+    </div>
+</div>
